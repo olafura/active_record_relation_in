@@ -5,7 +5,10 @@ RSpec.describe ActiveRecordRelationIn do
     expect(ActiveRecordRelationIn::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  context '.relation_in' do
+    let(:user) { User.new() }
+    let(:post) { Post.new(user_id: user.id) }
+
+    it 'has method' { method_defined? :relation_in }
   end
 end

@@ -1,6 +1,6 @@
 module ActiveRecord
   class Relation
-    def to_relation_in
+    def relation_in
       # attr_reader :table, :klass, :loaded, :predicate_builder
       # def initialize(klass, table: klass.arel_table, predicate_builder: klass.predicate_builder, values: {})
       #   @klass  = klass

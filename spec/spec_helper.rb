@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require "active_record_relation_in"
+require "support/databases"
+
+Databases.connect_to_sqlite
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
