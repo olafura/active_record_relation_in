@@ -4,5 +4,12 @@ require_relative "active_record_relation_in/version"
 
 module ActiveRecordRelationIn
   class Error < StandardError; end
-  # Your code goes here...
+
+  module Patch
+    extend ActiveSupport::Autoload
+
+    eager_autoload do
+      autoload :RelationPatch
+    end
+  end
 end

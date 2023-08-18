@@ -5,6 +5,7 @@ require "bundler/gem_tasks"
 require 'active_record'
 require "active_record_relation_in"
 require "support/databases"
+require "byebug"
 
 
 Databases.connect_to_sqlite

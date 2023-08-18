@@ -1,6 +1,6 @@
 module ActiveRecordRelationIn
   module Patch
-    class RelationPatch
+    module RelationPatch
       def relation_in
         # attr_reader :table, :klass, :loaded, :predicate_builder
         # def initialize(klass, table: klass.arel_table, predicate_builder: klass.predicate_builder, values: {})
@@ -18,4 +18,4 @@ module ActiveRecordRelationIn
     end
   end
 end
-ActiveRecord::Relation.prepend(ActiveRecordRelation::Patch::RelationPatch)
+ActiveRecord::Relation.prepend(ActiveRecordRelationIn::Patch::RelationPatch)
