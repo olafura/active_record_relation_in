@@ -8,9 +8,10 @@ RSpec.describe ActiveRecord::Relation do
     it 'has method' do
       expect(ActiveRecord::Relation.method_defined? :relation_in).to be true
       # expect(Post.for_users(user.id).method_defined? :relation_in).to be true
-      byebug
+      # byebug
+      old_scope = Post.for_users(user.id)
       new_scope = Post.for_users(user.id).relation_in
-      puts new_scope.to_sql
+      expect(new_scope.to_sql).to eq(old_scope.to_sql)
     end
   end
 end
