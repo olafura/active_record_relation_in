@@ -5,7 +5,7 @@ end
 
 class User < ActiveRecord::Base
   has_many :posts
-  has_many :drafts, -> { where draft: true  }, class_name: "Post"
+  has_many :drafts, -> { where draft: true }, class_name: "Post"
 end unless defined?(User)
 
 ActiveRecord::Base.connection.create_table :posts, force: true do |t|
@@ -18,5 +18,5 @@ end
 class Post < ActiveRecord::Base
   belongs_to :user
 
-  scope :for_users, -> (user_ids) { where(user_id: user_ids) }
+  scope :for_users, ->(user_ids) { where(user_id: user_ids) }
 end unless defined?(Post)
