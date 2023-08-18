@@ -5,6 +5,9 @@ RSpec.describe ActiveRecord::Relation do
     let(:user) { User.new() }
     let(:post) { Post.new(user_id: user.id) }
 
-    it 'has method' { post.for_user(user.id).method_defined? :relation_in }
+    it 'has method' do
+      # post.for_user(user.id).method_defined? :relation_in
+      ActiveRecord::Relation.method_defined? :relation_in
+    end
   end
 end

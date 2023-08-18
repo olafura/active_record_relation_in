@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveRecord::Base.connection.create_table :users, force: true do |t|
 end
 

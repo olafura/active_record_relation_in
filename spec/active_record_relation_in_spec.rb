@@ -9,6 +9,8 @@ RSpec.describe ActiveRecordRelationIn do
     let(:user) { User.new() }
     let(:post) { Post.new(user_id: user.id) }
 
-    it 'has method' { method_defined? :relation_in }
+    it 'has method' do
+      method_defined? :relation_in
+    end
   end
 end
