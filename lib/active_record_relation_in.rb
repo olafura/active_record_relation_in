@@ -3,9 +3,6 @@
 require_relative "active_record_relation_in/version"
 
 require "active_record"
-require "active_record/relation"
-require "active_record/relation/merger"
-require "active_record/relation/query_methods"
 
 module ActiveRecordRelationIn
   extend ActiveSupport::Autoload
