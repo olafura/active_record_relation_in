@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+gemspec path: ".."
+eval_gemfile "../Gemfile"
+
+git "https://github.com/rails/rails.git" do
+  gem "activerecord"
+end
+
+gem "pg", "< 2.0"
+
+# Fix for: https://github.com/rails/rails/issues/54260
+gem "concurrent-ruby", "1.3.4"

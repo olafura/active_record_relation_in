@@ -1,37 +1,75 @@
-# ActiveRecordRelationIn
+## Index
+- [Description and history](#description-and-history)
+- [Compatibility](#compatibility)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Scope Modifiers](#scope-modifiers)
+    - [Combine With IN](#combine-with-in)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/active_record_relation_in`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Description and History
 
-TODO: Delete this and the text above, and describe your gem
+Active Record Relation In grew out of the frustration that certain combining of scopes would make them not function.
+
+By default ActiveRecord combines different where statements with an AND statement. This makes it hard to write scopes that can be combined without doing a lot of trickery.
+
+Active Record Relation In is the continuation of maintaining and improving the work done by **George Protacio-Karaszi**, the original author of [active_record_extended](https://github.com/GeorgeKaraszi/ActiveRecordExtended).
+
+Since it's a great start of how to make sure combines correctly with Active Record and this feature was a bit to specific for them to want in their gem.
+
+## Compatibility
+
+This package is designed align and work with any officially supported Ruby and Rails versions.
+ - Minimum Ruby Version: 3.1.x **(EOL warning!)**
+ - Minimum Rails Version: 6.1.x **(EOL warning!)**
+ - Minimum Postgres Version: 12.x **(EOL warning!)**
+ - Latest Ruby supported: 3.3.x
+ - Latest Rails supported: 7.1.x
+ - Postgres: 11-current(16) (probably works with most older versions to a certain point)
 
 ## Installation
 
-Install the gem and add to the application's Gemfile by executing:
+Add this line to your application's Gemfile:
 
-    $ bundle add active_record_relation_in
+```ruby
+gem 'active_record_relation_in'
+```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+And then execute:
 
-    $ gem install active_record_relation_in
+    $ bundle
 
 ## Usage
 
-TODO: Write usage instructions here
+#### Scope Modifiers
 
-## Development
+#### Combine With IN
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+When you want to combine with statement with an IN statement instead of the usual AND statement
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+`.combine_with_in/0`
 
-## Contributing
+```ruby
+class User < ApplicationRecord
+end
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/active_record_relation_in. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/active_record_relation_in/blob/master/CODE_OF_CONDUCT.md).
+
+class Tag < ApplicationRecord
+  belongs_to :user
+  scope :for_users, ->(user_ids) { where(user_id: user_ids).combine_with_in }
+end
+
+Tag.where(id: 1).for_users([1, 2]).for_users(3)
+```
+
+Query Output
+```sql
+SELECT "tags".*
+FROM "tags"
+WHERE
+"tags"."id" = 1 AND
+"tags"."user_id" IN (1, 2, 3)
+```
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the ActiveRecordRelationIn project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/active_record_relation_in/blob/master/CODE_OF_CONDUCT.md).

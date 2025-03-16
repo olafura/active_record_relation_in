@@ -1,0 +1,19 @@
+RSpec/ExampleLength:
+  Enabled: true
+  Max: 11
+
+RSpec/NestedGroups:
+  Enabled: true
+  Max: 4
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Enabled: false
+
+RSpec/IndexedLet:
+  Enabled: false

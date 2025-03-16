@@ -1,6 +1,20 @@
 # frozen_string_literal: true
 
+require "simplecov"
+SimpleCov.start
+
 require "active_record_relation_in"
+# require "rspec-sqlimit"
+
+unless ENV["DATABASE_URL"]
+  require "dotenv"
+  Dotenv.load
+end
+
+ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"])
+
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require File.expand_path(f) }
+Dir["#{File.dirname(__FILE__)}/**/*examples.rb"].each { |f| require f }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
